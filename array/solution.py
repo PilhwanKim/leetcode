@@ -52,6 +52,34 @@ class Solution:
 
         return ret_list
 
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        row_sets = [set() for _ in range(9)]
+        column_sets = [set() for _ in range(9)]
+        subbox_sets = [set() for _ in range(9)]
+
+        for y_index, rows in enumerate(board):
+            for x_index, cell in enumerate(rows):
+                if cell == '.':
+                    continue
+
+                cell_int = int(cell)
+
+                row_set = row_sets[y_index]
+                if cell_int in row_set:
+                    return False
+                row_set.add(cell_int)
+
+                column_set = column_sets[x_index]
+                if cell_int in column_set:
+                    return False
+                column_set.add(cell_int)
+
+                subbox_set = subbox_sets[(y_index // 3) * 3 + (x_index // 3)]
+                if cell_int in subbox_set:
+                    return False
+                subbox_set.add(cell_int)
+
+        return True
 
 
 if __name__ == "__main__":
