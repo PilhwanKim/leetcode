@@ -1,4 +1,5 @@
 from typing import List
+import math
 
 
 class Solution:
@@ -104,3 +105,28 @@ class Solution:
                 subbox_set.add(cell_int)
 
         return True
+
+    def rotate_elements(self, matrix, start_x, start_y):
+        max_index = len(matrix) - 1
+        x = start_x
+        y = start_y
+        buffer_value = matrix[y][x]
+
+        for _ in range(4):
+            next_x = max_index - y
+            next_y = x
+
+            next_temp = matrix[next_y][next_x]
+            matrix[next_y][next_x] = buffer_value
+            buffer_value = next_temp
+
+            x = next_x
+            y = next_y
+
+    def rotate(self, matrix: List[List[int]]) -> None:
+        length = len(matrix)
+        y_len = math.ceil(length / 2)
+
+        for y_index in range(y_len):
+            for x_index in range(y_index, length - 1 - y_index):
+                self.rotate_elements(matrix, x_index, y_index)
