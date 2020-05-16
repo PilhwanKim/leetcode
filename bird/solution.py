@@ -49,6 +49,6 @@ if __name__ == "__main__":
         hobbies = fd.read().splitlines()
 
     start = time.time()
-    matched_result = Solution().match_by_hobby(hobbies, count)
+    matched_result = Solution().match_by_hobby(hobbies)
     Solution().print_result(matched_result)
     print(f"time :{time.time() - start}")
